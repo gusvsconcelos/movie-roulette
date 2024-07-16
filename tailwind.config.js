@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       dropShadow: {
-        brute: '3px 3px 0 rgb(0 0 0)',
+        brute: '3px 4px 0 rgb(0 0 0)',
       },
     },
   },
