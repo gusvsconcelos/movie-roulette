@@ -1,7 +1,3 @@
 export default function Header() {
-  return (
-    <h1 className='text-6xl text-pink-500 font-bold drop-shadow-brute'>
-      Movie Sorter!
-    </h1>
-  );
+  return <h1>Movie Sorter</h1>;
 }
