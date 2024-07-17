@@ -1,5 +1,5 @@
-import Title from './Title';
-import Nav from './Nav';
+import Title from '../ui/Title';
+import Nav from '../ui/Nav';
 
 export default function Header() {
   return (

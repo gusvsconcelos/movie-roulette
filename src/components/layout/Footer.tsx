@@ -1,8 +1,8 @@
-import Title from './Title';
+import Title from '../ui/Title';
 
 export default function Footer() {
   return (
-    <footer className='absolute bottom-0 w-screen p-9 bg-black'>
+    <footer className='absolute bottom-0 w-screen p-7 bg-black'>
       <Title styles='inline m-2 text-1xl font-bold text-white' />
       <p className='float-right m-2 text-xs text-white'>
         &copy; {new Date().getFullYear()}{' '}
