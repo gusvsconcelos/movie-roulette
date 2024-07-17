@@ -1,9 +1,5 @@
-function App() {
-  return (
-    <h1 className='text-6xl text-pink-500 font-bold drop-shadow-brute'>
-      Movie Sorter!
-    </h1>
-  );
-}
+import Header from './components/layout/Header';
 
-export default App;
+export default function App() {
+  return <Header />;
+}
