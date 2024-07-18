@@ -3,5 +3,9 @@ export interface Props {
 }
 
 export default function Title(props: Props) {
-  return <h1 className={props.styles}>Movie Sorter</h1>;
+  return (
+    <h1 className={`inline m-2 font-title font-black italic ${props.styles}`}>
+      Movie Sorter
+    </h1>
+  );
 }
