@@ -4,8 +4,8 @@ import Nav from '../ui/Nav';
 
 export default function Header() {
   return (
-    <header className='flex mr items-center justify-center p-7 mb-4 bg-white '>
-      <Title styles='mr-72 text-4xl text-black' />
+    <header className='flex justify-center items-center p-12 bg-white shadow-brute'>
+      <Title styles='absolute left-20 text-4xl text-black' />
       <Nav />
       <Switch />
     </header>
