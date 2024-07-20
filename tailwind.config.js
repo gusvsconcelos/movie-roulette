@@ -5,9 +5,10 @@ export default {
     extend: {
       dropShadow: {
         brute: '3px 3px 0 rgb(0 0 0)',
+        button: '2px 2px 0 rgb(0 0 0)',
       },
       boxShadow: {
-        brute: '0 4px 0 rgb(0 0 0)',
+        header: '0 4px 0 rgb(0 0 0)',
       },
       fontFamily: {
         title: ['Chivo', 'monospace'],

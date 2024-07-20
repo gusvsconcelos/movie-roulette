@@ -1,6 +1,7 @@
 /* custom fonts */
 /* -- Chivo -- */
 @import url('https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100..900;1,100..900&display=swap');
+/* -- Archivo Narrow -- */
 @import url('https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&display=swap');
 
 @tailwind base;
