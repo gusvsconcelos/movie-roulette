@@ -6,7 +6,7 @@ export default function App() {
   return (
     <div>
       <Header />
-      <Button text='Sort' />
+      <Button text='Button Component' />
       <Footer />
     </div>
   );
