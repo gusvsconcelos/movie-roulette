@@ -12,7 +12,7 @@ export default {
         header: '0 3px 0 rgb(0 0 0)',
       },
       fontFamily: {
-        title: ['Teko', 'monospace'],
+        title: ['Bebas Neue', 'monospace'],
         ui: ['Archivo Narrow', 'sans-serif'],
       },
       colors: {
