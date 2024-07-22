@@ -8,7 +8,7 @@ export default function Nav() {
         Sort Movie From List
       </a>
       <a
-        className='mx-3 p-2 border-2 border-black hover:shadow-brute'
+        className='mx-3 p-2 border-2 border-black bg-blue-300 hover:shadow-brute'
         href='https://github.com/gusvsconcelos/movie-sorter-react.git'
         target='_blank'>
         <img
