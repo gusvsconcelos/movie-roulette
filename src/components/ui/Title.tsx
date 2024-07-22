@@ -1,10 +1,6 @@
-export interface Props {
-  styles: string;
-}
-
-export default function Title(props: Props) {
+export default function Title({ styles }: { styles: string }) {
   return (
-    <h1 className={`mb-1 font-title font-black italic ${props.styles}`}>
+    <h1 className={`mb-1 font-title font-black ${styles}`}>
       <a href='#'>MOVIE SORTER</a>
     </h1>
   );
