@@ -1,4 +1,4 @@
-export default function Nav() {
+export function Nav() {
   return (
     <nav className='absolute right-32 mb-1 font-ui text-xl'>
       <a className='mx-3 hover:underline' href='#'>

@@ -1,4 +1,4 @@
-export default function ToggleSwitch() {
+export function ToggleSwitch() {
   return (
     <label className='absolute right-16 inline-flex items-center mb-1 cursor-pointer'>
       <input type='checkbox' value='' className='sr-only peer' />

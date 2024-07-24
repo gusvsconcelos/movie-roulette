@@ -1,6 +1,6 @@
-import Title from '../ui/Title';
+import { Title } from '../ui/Title';
 
-export default function Footer() {
+export function Footer() {
   return (
     <footer className='flex justify-center items-center w-screen mt-16 p-14 bg-black'>
       <Title styles='absolute left-14 mt-2 text-white text-xl' />
