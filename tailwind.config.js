@@ -12,8 +12,9 @@ export default {
         header: '0 3px 0 rgb(0 0 0)',
       },
       fontFamily: {
-        title: ['Bebas Neue', 'monospace'],
+        title: ['Big Shoulders Display', 'sans-serif'],
         ui: ['Archivo Narrow', 'sans-serif'],
+        bolder: ['Bebas Neue', 'monospace'],
       },
       colors: {
         violet: {

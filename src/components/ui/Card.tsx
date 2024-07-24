@@ -14,8 +14,8 @@ export function Card() {
       {/* movie information */}
       <div className='w-fit h-80 m-1 px-3 py-7'>
         <div className='flex-row justify-end items-end'>
-          <h1 className='font-title text-3xl'>Movie Name</h1>
-          <h2 className='font-title text-xl'>Director Name</h2>
+          <h1 className='font-bolder text-3xl'>Movie Name</h1>
+          <h2 className='font-bolder text-xl'>Director Name</h2>
         </div>
 
         {/* color palettes */}
