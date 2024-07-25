@@ -1,21 +1,16 @@
-import { Header } from './components/layout/Header';
-import { Footer } from './components/layout/Footer';
-import { Button } from './components/ui/Button';
-import { Card } from './components/ui/Card';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { Home } from './pages/home';
+import { SortMovie } from './pages/sort-random';
+import { SortList } from './pages/sort-list';
 
 export default function App() {
   return (
-    <>
-      <Header />
-
-      <main className='flex flex-col justify-center items-center min-h-[calc(100vh-192px)]'>
-        <Card />
-        <Button text='Button' />
-      </main>
-
-      <footer>
-        <Footer />
-      </footer>
-    </>
+    <Router>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/' element={<SortMovie />} />
+        <Route path='/' element={<SortList />} />
+      </Routes>
+    </Router>
   );
 }
