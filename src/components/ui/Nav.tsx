@@ -1,16 +1,18 @@
+import { Link } from 'react-router-dom';
+
 export function Nav() {
   return (
     <nav className='absolute right-32 mb-1 font-ui text-xl'>
-      <a
+      <Link
         className='mx-3 hover:underline underline-offset-4 decoration-2'
-        href='#'>
+        to='/sort-random'>
         Sort Random Movie
-      </a>
-      <a
+      </Link>
+      <Link
         className='mx-3 hover:underline underline-offset-4 decoration-2'
-        href='#'>
+        to='/sort-list'>
         Sort Movie From List
-      </a>
+      </Link>
       <a
         className='mx-3 p-2 border-2 border-black bg-blue-200 hover:shadow-button'
         href='https://github.com/gusvsconcelos/movie-sorter-react.git'
