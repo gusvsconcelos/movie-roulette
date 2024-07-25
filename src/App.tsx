@@ -8,7 +8,7 @@ export default function App() {
     <>
       <Header />
 
-      <main className='flex justify-center items-center min-h-[calc(100vh-192px)]'>
+      <main className='flex flex-col justify-center items-center min-h-[calc(100vh-192px)]'>
         <Card />
         <Button text='Button' />
       </main>
