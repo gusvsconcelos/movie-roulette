@@ -11,7 +11,10 @@
 @tailwind utilities;
 
 #root {
-  height: 100vh;
-  width: 100vw;
   background-color: #ffc29f;
+  background-image: url('src/assets/images/background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }

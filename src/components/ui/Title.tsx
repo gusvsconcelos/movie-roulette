@@ -1,6 +1,6 @@
 export function Title({ styles }: { styles: string }) {
   return (
-    <h1 className={`mb-1 font-title font-black ${styles}`}>
+    <h1 className={`font-title font-black italic ${styles}`}>
       <a href='#'>MOVIE SORTER</a>
     </h1>
   );

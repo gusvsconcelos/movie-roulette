@@ -1,9 +1,10 @@
 export function Card() {
   return (
-    <div className='flex justify-center items-center w-fit h-fit m-2 p-1 border-2 border-black bg-yellow-100 shadow-brute'>
+    <article className='flex justify-center items-center w-fit h-fit m-2 p-1 border-2 border-black bg-yellow-100 shadow-brute'>
       {/* movie cover */}
       <div className='relative w-56 h-80 m-1'>
         <div className='absolute top-8 left-4 w-48 h-[269px] border-2 border-black'></div>
+
         <img
           src='src/assets/images/movie-poster-placeholder.jpg'
           alt='Poster Placeholder'
@@ -18,7 +19,7 @@ export function Card() {
           <h2 className='font-bolder text-2xl'>Director Name</h2>
           <h3 className='font-ui text-xl'>Movie Gender</h3>
           <h3 className='font-ui text-xl'>Movie Year</h3>
-          <h3 className='font-ui text-xl'>Director Name</h3>
+          <h3 className='font-ui text-xl'>Movie Length</h3>
         </div>
 
         {/* color palettes */}
@@ -30,6 +31,6 @@ export function Card() {
           <div className='inline-block w-6 h-6 mr-1 bg-violet-200 border-2 border-black'></div>
         </div>
       </div>
-    </div>
+    </article>
   );
 }
