@@ -6,6 +6,7 @@ export function Home() {
   const [movieName, setMovieName] = useState('Movie Name');
   const [movieDate, setMovieDate] = useState('01-01-1970');
   const [movieDirector, setMovieDirector] = useState('Movie Director');
+  const [movieGenres, setMovieGenres] = useState('Genres')
 
   useEffect(() => {
     // const apiKey = import.meta.env.VITE_API_KEY;
@@ -30,11 +31,13 @@ export function Home() {
       );
       const data = await response.json();
 
-      setMoviePoster(data.results[4].poster_path);
-      setMovieName(data.results[4].title);
-      setMovieDate(data.results[4].release_date);
+      console.log(data.results);
 
-      movieID = data.results[4].id;
+      setMoviePoster(data.results[5].poster_path);
+      setMovieName(data.results[5].title);
+      setMovieDate(data.results[5].release_date);
+
+      movieID = data.results[5].id;
 
       const fetchCredits = async () => {
         const creditsResponse = await fetch(
@@ -52,6 +55,26 @@ export function Home() {
       };
 
       fetchCredits();
+
+      const fetchDetails = async () => {
+        const detailsResponse = await fetch(
+          `https://api.themoviedb.org/3/movie/${movieID}?language=en-US`,
+          options,
+        );
+        const detailsData = await detailsResponse.json();
+
+        console.log(detailsData.genres);
+
+        let genres: string = `${detailsData.genres[0].name}, `;
+
+        for (let i = 1; i < detailsData.genres.length; i++) {
+          genres += `${detailsData.genres[i].name}, `;
+        }
+
+        console.log(genres);
+      };
+
+      fetchDetails();
     };
 
     fetchData();

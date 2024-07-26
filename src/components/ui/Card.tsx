@@ -11,7 +11,7 @@ const defaultProps: Props = {
   poster: 'src/assets/images/movie-poster-placeholder.jpg',
   movie: 'Movie Name',
   director: 'Director',
-  gender: 'Gender',
+  gender: 'Genres',
   date: '01-01-1970',
   length: '2h 0m',
 };
