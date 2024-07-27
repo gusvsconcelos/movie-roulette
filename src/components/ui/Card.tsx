@@ -30,6 +30,7 @@ export function Card(prop: Props) {
           src={poster}
           alt='Poster Placeholder'
           className='absolute top-5 left-2 w-48 h-[275px]'
+          id='poster'
         />
       </div>
 

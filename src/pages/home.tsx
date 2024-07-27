@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Card } from '../components/ui/Card';
+// import ColorThief from 'colorthief';
 
 export function Home() {
   const [moviePoster, setMoviePoster] = useState();
@@ -37,6 +38,11 @@ export function Home() {
       setMoviePoster(data.results[1].poster_path);
       setMovieName(data.results[1].title);
       setMovieDate(data.results[1].release_date);
+
+      // const colorThief = new ColorThief();
+      // const img = document.getElementById('#poster');
+      // const colors = colorThief.getPalette(img, 5);
+      // console.log(colors);
 
       movieID = data.results[1].id;
 
