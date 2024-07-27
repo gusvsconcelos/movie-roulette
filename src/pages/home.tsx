@@ -6,7 +6,8 @@ export function Home() {
   const [movieName, setMovieName] = useState('Movie Name');
   const [movieDate, setMovieDate] = useState('01-01-1970');
   const [movieDirector, setMovieDirector] = useState('Movie Director');
-  const [movieGenres, setMovieGenres] = useState('Genres')
+  const [movieGenres, setMovieGenres] = useState('Genres');
+  const [movieRuntime, setMovieRuntime] = useState('2h 0m');
 
   useEffect(() => {
     // const apiKey = import.meta.env.VITE_API_KEY;
@@ -33,11 +34,11 @@ export function Home() {
 
       console.log(data.results);
 
-      setMoviePoster(data.results[5].poster_path);
-      setMovieName(data.results[5].title);
-      setMovieDate(data.results[5].release_date);
+      setMoviePoster(data.results[1].poster_path);
+      setMovieName(data.results[1].title);
+      setMovieDate(data.results[1].release_date);
 
-      movieID = data.results[5].id;
+      movieID = data.results[1].id;
 
       const fetchCredits = async () => {
         const creditsResponse = await fetch(
@@ -63,15 +64,31 @@ export function Home() {
         );
         const detailsData = await detailsResponse.json();
 
-        console.log(detailsData.genres);
+        const genresFormat = () => {
+          let genres: string = `${detailsData.genres[0].name}, `;
 
-        let genres: string = `${detailsData.genres[0].name}, `;
+          for (let i = 1; i < detailsData.genres.length; i++) {
+            genres += `${detailsData.genres[i].name}, `;
+          }
 
-        for (let i = 1; i < detailsData.genres.length; i++) {
-          genres += `${detailsData.genres[i].name}, `;
-        }
+          if (genres.endsWith(', ')) {
+            genres = genres.slice(0, -2);
+          }
 
-        console.log(genres);
+          return genres;
+        };
+
+        const runtimeFormat = () => {
+          const runtime: number = detailsData.runtime;
+
+          const hours: number = Math.floor(runtime / 60);
+          const minutes: number = runtime % 60;
+
+          return `${hours}h ${minutes}m`;
+        };
+
+        setMovieRuntime(runtimeFormat);
+        setMovieGenres(genresFormat);
       };
 
       fetchDetails();
@@ -85,7 +102,9 @@ export function Home() {
       poster={`https://image.tmdb.org/t/p/original/${moviePoster}`}
       movie={movieName}
       director={movieDirector}
+      genres={movieGenres}
       date={movieDate}
+      runtime={movieRuntime}
     />
   );
 }

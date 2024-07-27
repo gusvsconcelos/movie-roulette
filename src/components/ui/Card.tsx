@@ -2,23 +2,23 @@ interface Props {
   poster?: string;
   movie?: string;
   director?: string;
-  gender?: string;
+  genres?: string;
   date?: string;
-  length?: string;
+  runtime?: string;
 }
 
 const defaultProps: Props = {
   poster: 'src/assets/images/movie-poster-placeholder.jpg',
   movie: 'Movie Name',
   director: 'Director',
-  gender: 'Genres',
+  genres: 'Genres',
   date: '01-01-1970',
-  length: '2h 0m',
+  runtime: '2h 0m',
 };
 
 export function Card(prop: Props) {
   const finalProps = { ...defaultProps, ...prop };
-  const { poster, movie, director, gender, date, length } = finalProps;
+  const { poster, movie, director, genres, date, runtime } = finalProps;
 
   return (
     <article className='flex justify-center items-center w-fit h-fit m-2 p-1 border-2 border-black bg-yellow-100 shadow-brute'>
@@ -38,9 +38,9 @@ export function Card(prop: Props) {
         <div className='flex-row justify-end items-end mb-4'>
           <h1 className='font-bolder text-4xl'>{movie}</h1>
           <h2 className='font-bolder text-2xl'>{director}</h2>
-          <h3 className='font-ui text-xl'>{gender}</h3>
+          <h3 className='font-ui text-xl'>{genres}</h3>
           <h3 className='font-ui text-xl'>{date}</h3>
-          <h3 className='font-ui text-xl'>{length}</h3>
+          <h3 className='font-ui text-xl'>{runtime}</h3>
         </div>
 
         {/* color palettes */}
