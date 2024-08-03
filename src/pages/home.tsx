@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Card } from '../components/ui/Card';
-// import ColorThief from 'colorthief';
 
 export function Home() {
-  const [moviePoster, setMoviePoster] = useState();
-  const [movieName, setMovieName] = useState('Movie Name');
-  const [movieDate, setMovieDate] = useState('01-01-1970');
-  const [movieDirector, setMovieDirector] = useState('Movie Director');
-  const [movieGenres, setMovieGenres] = useState('Genres');
-  const [movieRuntime, setMovieRuntime] = useState('2h 0m');
+  const [moviePoster, setMoviePoster] = useState<string>();
+  const [movieName, setMovieName] = useState<string>('Movie Name');
+  const [movieDate, setMovieDate] = useState<string>('01-01-1970');
+  const [movieDirector, setMovieDirector] = useState<string>('Movie Director');
+  const [movieGenres, setMovieGenres] = useState<string>('Genres');
+  const [movieRuntime, setMovieRuntime] = useState<string>('2h 0m');
 
   useEffect(() => {
     // const apiKey = import.meta.env.VITE_API_KEY;
@@ -33,16 +32,11 @@ export function Home() {
       );
       const data = await response.json();
 
-      console.log(data.results);
+      // console.log(data.results);
 
       setMoviePoster(data.results[1].poster_path);
       setMovieName(data.results[1].title);
       setMovieDate(data.results[1].release_date);
-
-      // const colorThief = new ColorThief();
-      // const img = document.getElementById('#poster');
-      // const colors = colorThief.getPalette(img, 5);
-      // console.log(colors);
 
       movieID = data.results[1].id;
 
