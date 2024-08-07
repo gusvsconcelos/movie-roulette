@@ -7,19 +7,7 @@ interface Props {
   runtime?: string;
 }
 
-const defaultProps: Props = {
-  poster: 'src/assets/images/movie-poster-placeholder.jpg',
-  movie: 'Movie Name',
-  director: 'Director',
-  genres: 'Genres',
-  date: '01-01-1970',
-  runtime: '2h 0m',
-};
-
 export function Card(prop: Props) {
-  const finalProps = { ...defaultProps, ...prop };
-  const { poster, movie, director, genres, date, runtime } = finalProps;
-
   return (
     <article className='flex justify-center items-center w-fit h-fit m-2 p-1 border-2 border-black bg-yellow-100 shadow-brute'>
       {/* movie poster */}
@@ -27,7 +15,7 @@ export function Card(prop: Props) {
         <div className='absolute top-8 left-4 w-[195px] h-[275px] border-2 border-black'></div>
 
         <img
-          src={poster}
+          src={prop.poster}
           alt='Poster Placeholder'
           className='absolute top-5 left-2 w-48 h-[275px]'
           id='poster'
@@ -37,11 +25,11 @@ export function Card(prop: Props) {
       {/* movie information */}
       <div className='w-fit h-80 m-1 py-14 pr-3'>
         <div className='flex-row justify-end items-end mb-4'>
-          <h1 className='font-bolder text-4xl'>{movie}</h1>
-          <h2 className='font-bolder text-2xl'>{director}</h2>
-          <h3 className='font-ui text-xl'>{genres}</h3>
-          <h3 className='font-ui text-xl'>{date}</h3>
-          <h3 className='font-ui text-xl'>{runtime}</h3>
+          <h1 className='font-bolder text-4xl'>{prop.movie}</h1>
+          <h2 className='font-bolder text-2xl'>{prop.director}</h2>
+          <h3 className='font-ui text-xl'>{prop.genres}</h3>
+          <h3 className='font-ui text-xl'>{prop.date}</h3>
+          <h3 className='font-ui text-xl'>{prop.runtime}</h3>
         </div>
 
         {/* color palettes */}
