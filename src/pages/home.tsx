@@ -99,7 +99,11 @@ export function Home() {
 
   return (
     <Card
-      poster={`https://image.tmdb.org/t/p/original/${moviePoster}`}
+      poster={
+        moviePoster
+          ? `https://image.tmdb.org/t/p/original/${moviePoster}`
+          : 'src/assets/images/movie-poster-placeholder.jpg'
+      }
       movie={movieName}
       director={movieDirector}
       genres={movieGenres}
