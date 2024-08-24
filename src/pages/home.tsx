@@ -2,21 +2,35 @@ import { useEffect, useState } from 'react';
 import { Card } from '../components/ui/Card';
 
 export function Home() {
-  const [moviePoster, setMoviePoster] = useState<string>();
-  const [movieName, setMovieName] = useState<string>('Movie Name');
-  const [movieDate, setMovieDate] = useState<string>('01-01-1970');
-  const [movieDirector, setMovieDirector] = useState<string>('Movie Director');
-  const [movieGenres, setMovieGenres] = useState<string>('Genres');
-  const [movieRuntime, setMovieRuntime] = useState<string>('2h 0m');
+  // Initializing React States
+  const [movie, setMovie] = useState<{
+    poster: string;
+    name: string;
+    date: string;
+    director: string;
+    genres: string;
+    runtime: string;
+  }>({
+    poster: '',
+    name: 'Movie Name',
+    date: '01-01-1970',
+    director: 'Movie Director',
+    genres: 'Genres',
+    runtime: '2h 0m',
+  });
 
+  // Updating React States
   useEffect(() => {
-    // const apiKey = import.meta.env.VITE_API_KEY;
+    // Authentication variables
+    const apiKey = import.meta.env.VITE_API_KEY;
     const authToken = import.meta.env.VITE_ACCESS_TOKEN_AUTH;
+
     let movieID: number;
 
-    // console.log('api: ' + apiKey);
-    // console.log('auth token: ' + authToken);
+    console.log(`api: ${apiKey}`);
+    console.log(`auth token: ${authToken}`);
 
+    // API Data Fetch
     const options = {
       method: 'GET',
       headers: {
@@ -28,39 +42,59 @@ export function Home() {
     const fetchData = async () => {
       const response = await fetch(
         'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1',
-        options,
+        options
       );
       const data = await response.json();
 
-      // console.log(data.results);
+      console.log('API Results:');
+      console.log(data.results);
 
-      setMoviePoster(data.results[1].poster_path);
-      setMovieName(data.results[1].title);
-      setMovieDate(data.results[1].release_date);
+      // SETTING MOVIE DATA //
+      // Variable to change movie selection
+      const movie: number = 1;
 
-      movieID = data.results[1].id;
+      // poster
+      setMovie((prevMovie) => ({
+        ...prevMovie,
+        poster: data.results[movie].poster_path,
+      }));
+      // name
+      setMovie((prevMovie) => ({
+        ...prevMovie,
+        name: data.results[movie].title,
+      }));
+      // date
+      setMovie((prevMovie) => ({
+        ...prevMovie,
+        date: data.results[movie].release_date,
+      }));
+
+      movieID = data.results[movie].id;
 
       const fetchCredits = async () => {
         const creditsResponse = await fetch(
           `https://api.themoviedb.org/3/movie/${movieID}/credits?language=en-US`,
-          options,
+          options
         );
         const creditsData = await creditsResponse.json();
 
         const director = creditsData.crew.filter(
           (director: { known_for_department: string }) =>
-            director.known_for_department === 'Directing',
+            director.known_for_department === 'Directing'
         );
 
-        setMovieDirector(director[0].name);
+        // director
+        setMovie((prevMovie) => ({
+          ...prevMovie,
+          director: director[0].name,
+        }));
       };
-
       fetchCredits();
 
       const fetchDetails = async () => {
         const detailsResponse = await fetch(
           `https://api.themoviedb.org/3/movie/${movieID}?language=en-US`,
-          options,
+          options
         );
         const detailsData = await detailsResponse.json();
 
@@ -87,28 +121,34 @@ export function Home() {
           return `${hours}h ${minutes}m`;
         };
 
-        setMovieRuntime(runtimeFormat);
-        setMovieGenres(genresFormat);
+        // runtime
+        setMovie((prevMovie) => ({
+          ...prevMovie,
+          runtime: runtimeFormat(),
+        }));
+        // genres
+        setMovie((prevMovie) => ({
+          ...prevMovie,
+          genres: genresFormat(),
+        }));
       };
-
       fetchDetails();
     };
-
     fetchData();
   }, []);
 
   return (
     <Card
       poster={
-        moviePoster
-          ? `https://image.tmdb.org/t/p/original/${moviePoster}`
+        movie.poster
+          ? `https://image.tmdb.org/t/p/original/${movie.poster}`
           : 'src/assets/images/movie-poster-placeholder.jpg'
       }
-      movie={movieName}
-      director={movieDirector}
-      genres={movieGenres}
-      date={movieDate}
-      runtime={movieRuntime}
+      movie={movie.name}
+      director={movie.director}
+      genres={movie.genres}
+      date={movie.date}
+      runtime={movie.runtime}
     />
   );
 }
