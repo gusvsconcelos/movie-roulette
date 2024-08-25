@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import { Card } from '../components/ui/Card';
 
 export function Home() {
-  // Initializing React States
+  // Initializing react states
   const [movie, setMovie] = useState<{
+    index: number;
     poster: string;
     name: string;
     date: string;
@@ -11,6 +12,7 @@ export function Home() {
     genres: string;
     runtime: string;
   }>({
+    index: 0,
     poster: '',
     name: 'Movie Name',
     date: '01-01-1970',
@@ -19,18 +21,26 @@ export function Home() {
     runtime: '2h 0m',
   });
 
-  // Updating React States
+  // Updating react states
   useEffect(() => {
     // Authentication variables
     const apiKey = import.meta.env.VITE_API_KEY;
     const authToken = import.meta.env.VITE_ACCESS_TOKEN_AUTH;
-
+    const intervalTime: number = 3000;
     let movieID: number;
 
     console.log(`api: ${apiKey}`);
     console.log(`auth token: ${authToken}`);
 
-    // API Data Fetch
+    // Variable to change movie selection
+    const interval: NodeJS.Timeout = setInterval(() => {
+      setMovie((prevMovie) => ({
+        ...prevMovie,
+        index: (prevMovie.index + 1) % 20, // Reset index to 0 when greater than or equal to 20
+      }));
+    }, intervalTime);
+
+    // API data fetch
     const options = {
       method: 'GET',
       headers: {
@@ -49,27 +59,25 @@ export function Home() {
       console.log('API Results:');
       console.log(data.results);
 
-      // SETTING MOVIE DATA //
-      // Variable to change movie selection
-      const movie: number = 1;
+      // SETTING MOVIE DATA
 
       // poster
       setMovie((prevMovie) => ({
         ...prevMovie,
-        poster: data.results[movie].poster_path,
+        poster: data.results[movie.index].poster_path,
       }));
       // name
       setMovie((prevMovie) => ({
         ...prevMovie,
-        name: data.results[movie].title,
+        name: data.results[movie.index].title,
       }));
       // date
       setMovie((prevMovie) => ({
         ...prevMovie,
-        date: data.results[movie].release_date,
+        date: data.results[movie.index].release_date,
       }));
 
-      movieID = data.results[movie].id;
+      movieID = data.results[movie.index].id;
 
       const fetchCredits = async () => {
         const creditsResponse = await fetch(
@@ -79,10 +87,11 @@ export function Home() {
         const creditsData = await creditsResponse.json();
 
         const director = creditsData.crew.filter(
-          (director: { known_for_department: string }) =>
-            director.known_for_department === 'Directing'
+          (director: { department: string }) =>
+            director.department === 'Directing'
         );
 
+        console.log(director);
         // director
         setMovie((prevMovie) => ({
           ...prevMovie,
@@ -135,7 +144,9 @@ export function Home() {
       fetchDetails();
     };
     fetchData();
-  }, []);
+
+    return () => clearInterval(interval);
+  }, [movie.index]);
 
   return (
     <Card
