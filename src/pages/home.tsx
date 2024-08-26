@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Card } from '../components/ui/Card';
+import { PageTitle } from '../components/ui/PageTitle';
 
 export function Home() {
   // Initializing react states
@@ -26,7 +27,7 @@ export function Home() {
     // Authentication variables
     const apiKey = import.meta.env.VITE_API_KEY;
     const authToken = import.meta.env.VITE_ACCESS_TOKEN_AUTH;
-    const intervalTime: number = 3000;
+    const intervalTime: number = 5000;
     let movieID: number;
 
     console.log(`api: ${apiKey}`);
@@ -56,11 +57,9 @@ export function Home() {
       );
       const data = await response.json();
 
-      console.log('API Results:');
-      console.log(data.results);
+      console.log(`API Results: ${data.results}`);
 
       // SETTING MOVIE DATA
-
       // poster
       setMovie((prevMovie) => ({
         ...prevMovie,
@@ -91,7 +90,6 @@ export function Home() {
             director.department === 'Directing'
         );
 
-        console.log(director);
         // director
         setMovie((prevMovie) => ({
           ...prevMovie,
@@ -123,7 +121,6 @@ export function Home() {
 
         const runtimeFormat = () => {
           const runtime: number = detailsData.runtime;
-
           const hours: number = Math.floor(runtime / 60);
           const minutes: number = runtime % 60;
 
@@ -149,17 +146,20 @@ export function Home() {
   }, [movie.index]);
 
   return (
-    <Card
-      poster={
-        movie.poster
-          ? `https://image.tmdb.org/t/p/original/${movie.poster}`
-          : 'src/assets/images/movie-poster-placeholder.jpg'
-      }
-      movie={movie.name}
-      director={movie.director}
-      genres={movie.genres}
-      date={movie.date}
-      runtime={movie.runtime}
-    />
+    <>
+      <PageTitle title='IN THEATERS' />
+      <Card
+        poster={
+          movie.poster
+            ? `https://image.tmdb.org/t/p/original/${movie.poster}`
+            : 'src/assets/images/movie-poster-placeholder.jpg'
+        }
+        movie={movie.name}
+        director={movie.director}
+        genres={movie.genres}
+        date={movie.date}
+        runtime={movie.runtime}
+      />
+    </>
   );
 }
