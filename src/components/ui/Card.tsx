@@ -1,4 +1,5 @@
 interface Props {
+  title?: string;
   poster?: string;
   movie?: string;
   director?: string;

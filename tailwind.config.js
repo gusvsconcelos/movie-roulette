@@ -5,7 +5,7 @@ export default {
     extend: {
       dropShadow: {
         brute: '4px 4px 0 rgb(0 0 0)',
-        white: '48px 14px 0 rgb(255 255 255)',
+        white: '16px 16px 0 rgb(255 255 255)',
       },
       boxShadow: {
         brute: '4px 4px 0 rgb(0 0 0)',

@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Card } from '../components/ui/Card';
-import { PageTitle } from '../components/ui/PageTitle';
 
 export function Home() {
   // Initializing react states
@@ -147,8 +146,8 @@ export function Home() {
 
   return (
     <>
-      <PageTitle title='IN THEATERS' />
       <Card
+        title='Movies in Theater'
         poster={
           movie.poster
             ? `https://image.tmdb.org/t/p/original/${movie.poster}`
