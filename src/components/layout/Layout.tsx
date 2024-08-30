@@ -6,7 +6,7 @@ export function Layout() {
   return (
     <>
       <Header />
-      <main className='flex flex-col justify-center items-center min-h-[calc(100vh-192px)]'>
+      <main className='flex flex-col justify-center items-center min-h-[calc(100vh-224px)]'>
         <Outlet />
       </main>
       <Footer />

@@ -26,7 +26,7 @@ export function Home() {
     // Authentication variables
     const apiKey = import.meta.env.VITE_API_KEY;
     const authToken = import.meta.env.VITE_ACCESS_TOKEN_AUTH;
-    const intervalTime: number = 5000;
+    const intervalTime: number = 8000;
     let movieID: number;
 
     console.log(`api: ${apiKey}`);

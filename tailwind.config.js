@@ -5,12 +5,11 @@ export default {
     extend: {
       dropShadow: {
         brute: '4px 4px 0 rgb(0 0 0)',
-        white: '16px 16px 0 rgb(255 255 255)',
       },
       boxShadow: {
-        brute: '4px 4px 0 rgb(0 0 0)',
-        header: '0 2px 0 rgb(0 0 0)',
-        button: '3px 3px 0 rgb(0 0 0)',
+        brute: '6px 6px 0 rgb(0 0 0)',
+        header: '0 4px 0 rgb(0 0 0)',
+        button: '4px 4px 0 rgb(0 0 0)',
       },
       fontFamily: {
         title: ['Big Shoulders Display', 'sans-serif'],

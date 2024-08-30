@@ -10,7 +10,7 @@ interface Props {
 
 export function Card(prop: Props) {
   return (
-    <article className='flex justify-center items-center w-fit h-fit m-2 p-1 border-2 border-black bg-yellow-100 shadow-brute'>
+    <article className='flex justify-center items-center w-fit h-fit m-2 p-1 border-4 border-black bg-[#F2ECE9] shadow-brute'>
       {/* movie poster */}
       <div className='relative w-56 h-80 m-1'>
         <div className='absolute top-8 left-4 w-[195px] h-[275px] border-2 border-black'></div>
@@ -26,11 +26,11 @@ export function Card(prop: Props) {
       {/* movie information */}
       <div className='w-fit h-80 m-1 py-14 pr-3'>
         <div className='flex-row justify-end items-end mb-4'>
-          <h1 className='font-bolder text-4xl'>{prop.movie}</h1>
-          <h2 className='font-bolder text-2xl'>{prop.director}</h2>
-          <h3 className='font-ui text-xl'>{prop.genres}</h3>
-          <h3 className='font-ui text-xl'>{prop.date}</h3>
-          <h3 className='font-ui text-xl'>{prop.runtime}</h3>
+          <h1 className='font-bolder text-4xl antialiased'>{prop.movie}</h1>
+          <h2 className='font-bolder text-2xl antialiased'>{prop.director}</h2>
+          <h3 className='font-ui text-xl antialiased'>{prop.genres}</h3>
+          <h3 className='font-ui text-xl antialiased'>{prop.date}</h3>
+          <h3 className='font-ui text-xl antialiased'>{prop.runtime}</h3>
         </div>
 
         {/* color palettes */}
