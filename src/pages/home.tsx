@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Card } from '../components/ui/Card';
+import { InTheater } from '../components/ui/Title';
 
 export function Home() {
   // Initializing react states
@@ -16,7 +17,7 @@ export function Home() {
     poster: '',
     name: 'Movie Name',
     date: '01-01-1970',
-    director: 'Movie Director',
+    director: 'Movie Diector',
     genres: 'Genres',
     runtime: '2h 0m',
   });
@@ -28,6 +29,7 @@ export function Home() {
     const authToken = import.meta.env.VITE_ACCESS_TOKEN_AUTH;
     const intervalTime: number = 8000;
     let movieID: number;
+    let movieTitle: string;
 
     console.log(`api: ${apiKey}`);
     console.log(`auth token: ${authToken}`);
@@ -64,11 +66,21 @@ export function Home() {
         ...prevMovie,
         poster: data.results[movie.index].poster_path,
       }));
+
       // name
+      if (
+        data.results[movie.index].title.includes(':') &&
+        data.results[movie.index].title.length > 20
+      ) {
+        movieTitle = data.results[movie.index].title.split(':')[0];
+      } else {
+        movieTitle = data.results[movie.index].title;
+      }
       setMovie((prevMovie) => ({
         ...prevMovie,
-        name: data.results[movie.index].title,
+        name: movieTitle,
       }));
+
       // date
       setMovie((prevMovie) => ({
         ...prevMovie,
@@ -131,6 +143,7 @@ export function Home() {
           ...prevMovie,
           runtime: runtimeFormat(),
         }));
+
         // genres
         setMovie((prevMovie) => ({
           ...prevMovie,
@@ -146,6 +159,7 @@ export function Home() {
 
   return (
     <>
+      <InTheater />
       <Card
         title='Movies in Theater'
         poster={

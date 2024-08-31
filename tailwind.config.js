@@ -5,6 +5,7 @@ export default {
     extend: {
       dropShadow: {
         brute: '4px 4px 0 rgb(0 0 0)',
+        inverse: '4px 4px 0 rgb(255 255 255)',
       },
       boxShadow: {
         brute: '6px 6px 0 rgb(0 0 0)',
@@ -15,6 +16,16 @@ export default {
         title: ['Big Shoulders Display', 'sans-serif'],
         ui: ['Archivo Narrow', 'sans-serif'],
         bolder: ['Bebas Neue', 'monospace'],
+      },
+      backgroundColor: {
+        white: {
+          alt: '#F2ECE9',
+        },
+      },
+      textColor: {
+        white: {
+          alt: '#F2ECE9',
+        },
       },
       colors: {
         violet: {

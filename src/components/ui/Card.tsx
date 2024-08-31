@@ -10,10 +10,10 @@ interface Props {
 
 export function Card(prop: Props) {
   return (
-    <article className='flex justify-center items-center w-fit h-fit m-2 p-1 border-4 border-black bg-[#F2ECE9] shadow-brute'>
+    <article className='flex justify-center items-center w-fit h-fit m-2 p-1 border-4 border-black bg-white-alt shadow-brute'>
       {/* movie poster */}
       <div className='relative w-56 h-80 m-1'>
-        <div className='absolute top-8 left-4 w-[195px] h-[275px] border-2 border-black'></div>
+        <div className='absolute top-8 left-4 w-[195px] h-[274px] border-2 border-black'></div>
 
         <img
           src={prop.poster}

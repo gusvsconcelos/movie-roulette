@@ -19,7 +19,7 @@ export function Nav() {
         target='_blank'>
         <img
           src='/src/assets/icons/github-mark.svg'
-          className='inline w-5 mb-1 mr-2'
+          className='inline w-5 mb-[0.35rem] mr-[0.35rem]'
         />
         GitHub
       </a>
