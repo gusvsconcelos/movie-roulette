@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import { Card } from '../components/ui/Card';
 import { InTheater } from '../components/ui/Title';
 
@@ -22,137 +23,108 @@ export function Home() {
     runtime: '2h 0m',
   });
 
-  // Updating react states
+  const [isVisible, setIsVisible] = useState<boolean>(true);
+
   useEffect(() => {
     // Authentication variables
-    const apiKey = import.meta.env.VITE_API_KEY;
     const authToken = import.meta.env.VITE_ACCESS_TOKEN_AUTH;
-    const intervalTime: number = 8000;
-    let movieID: number;
-    let movieTitle: string;
 
-    console.log(`api: ${apiKey}`);
-    console.log(`auth token: ${authToken}`);
+    // Global variables
+    const intervalTime: number = 3000;
 
-    // Variable to change movie selection
-    const interval: NodeJS.Timeout = setInterval(() => {
-      setMovie((prevMovie) => ({
-        ...prevMovie,
-        index: (prevMovie.index + 1) % 20, // Reset index to 0 when greater than or equal to 20
-      }));
+    // console.log(`auth token: ${authToken}`);
+
+    const interval = setInterval(() => {
+      setIsVisible(false); // Hide the card component
+
+      setTimeout(async () => {
+        // Variable to change movie selection
+        setMovie((prevMovie) => ({
+          ...prevMovie,
+          index: (prevMovie.index + 1) % 20, // Reset index to 0 when greater than or equal to 20
+        }));
+
+        setIsVisible(true); // Show the card component
+
+        // API data fetch
+        const options = {
+          method: 'GET',
+          headers: {
+            accept: 'application/json',
+            Authorization: `Bearer ${authToken}`,
+          },
+        };
+
+        const fetchData = async () => {
+          const response = await fetch(
+            'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1',
+            options
+          );
+          const data = await response.json();
+
+          // console.log(`API Results: ${data.results}`);
+
+          const movieTitle: string =
+            data.results[movie.index].title.includes(':') &&
+            data.results[movie.index].title.length > 20
+              ? data.results[movie.index].title.split(':')[0]
+              : data.results[movie.index].title;
+
+          // MOVIE DATA
+          setMovie((prevMovie) => ({
+            ...prevMovie,
+            poster: data.results[movie.index].poster_path,
+            name: movieTitle,
+            date: data.results[movie.index].release_date,
+          }));
+
+          const movieID = data.results[movie.index].id;
+
+          const fetchCredits = async () => {
+            const creditsResponse = await fetch(
+              `https://api.themoviedb.org/3/movie/${movieID}/credits?language=en-US`,
+              options
+            );
+            const credits = await creditsResponse.json();
+
+            const director = credits.crew.find(
+              (crew: { department: string }) => crew.department === 'Directing'
+            );
+
+            // Director
+            setMovie((prevMovie) => ({
+              ...prevMovie,
+              director: director ? director.name : 'Unknown',
+            }));
+          };
+          fetchCredits();
+
+          const fetchDetails = async () => {
+            const detailsResponse = await fetch(
+              `https://api.themoviedb.org/3/movie/${movieID}?language=en-US`,
+              options
+            );
+            const details = await detailsResponse.json();
+
+            // Formatting genres and runtime information
+            const genres = details.genres
+              .map((genre: { name: string }) => genre.name)
+              .join(', ');
+            const runtime = `${Math.floor(details.runtime / 60)}h ${
+              details.runtime % 60
+            }m`;
+
+            setMovie((prevMovie) => ({
+              ...prevMovie,
+              runtime: runtime,
+              genres: genres,
+            }));
+          };
+          fetchDetails();
+        };
+        fetchData();
+      }, 500);
     }, intervalTime);
-
-    // API data fetch
-    const options = {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-        Authorization: `Bearer ${authToken}`,
-      },
-    };
-
-    const fetchData = async () => {
-      const response = await fetch(
-        'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1',
-        options
-      );
-      const data = await response.json();
-
-      console.log(`API Results: ${data.results}`);
-
-      // SETTING MOVIE DATA
-      // poster
-      setMovie((prevMovie) => ({
-        ...prevMovie,
-        poster: data.results[movie.index].poster_path,
-      }));
-
-      // name
-      if (
-        data.results[movie.index].title.includes(':') &&
-        data.results[movie.index].title.length > 20
-      ) {
-        movieTitle = data.results[movie.index].title.split(':')[0];
-      } else {
-        movieTitle = data.results[movie.index].title;
-      }
-      setMovie((prevMovie) => ({
-        ...prevMovie,
-        name: movieTitle,
-      }));
-
-      // date
-      setMovie((prevMovie) => ({
-        ...prevMovie,
-        date: data.results[movie.index].release_date,
-      }));
-
-      movieID = data.results[movie.index].id;
-
-      const fetchCredits = async () => {
-        const creditsResponse = await fetch(
-          `https://api.themoviedb.org/3/movie/${movieID}/credits?language=en-US`,
-          options
-        );
-        const creditsData = await creditsResponse.json();
-
-        const director = creditsData.crew.filter(
-          (director: { department: string }) =>
-            director.department === 'Directing'
-        );
-
-        // director
-        setMovie((prevMovie) => ({
-          ...prevMovie,
-          director: director[0].name,
-        }));
-      };
-      fetchCredits();
-
-      const fetchDetails = async () => {
-        const detailsResponse = await fetch(
-          `https://api.themoviedb.org/3/movie/${movieID}?language=en-US`,
-          options
-        );
-        const detailsData = await detailsResponse.json();
-
-        const genresFormat = () => {
-          let genres: string = `${detailsData.genres[0].name}, `;
-
-          for (let i = 1; i < detailsData.genres.length; i++) {
-            genres += `${detailsData.genres[i].name}, `;
-          }
-
-          if (genres.endsWith(', ')) {
-            genres = genres.slice(0, -2);
-          }
-
-          return genres;
-        };
-
-        const runtimeFormat = () => {
-          const runtime: number = detailsData.runtime;
-          const hours: number = Math.floor(runtime / 60);
-          const minutes: number = runtime % 60;
-
-          return `${hours}h ${minutes}m`;
-        };
-
-        // runtime
-        setMovie((prevMovie) => ({
-          ...prevMovie,
-          runtime: runtimeFormat(),
-        }));
-
-        // genres
-        setMovie((prevMovie) => ({
-          ...prevMovie,
-          genres: genresFormat(),
-        }));
-      };
-      fetchDetails();
-    };
-    fetchData();
 
     return () => clearInterval(interval);
   }, [movie.index]);
@@ -160,19 +132,28 @@ export function Home() {
   return (
     <>
       <InTheater />
-      <Card
-        title='Movies in Theater'
-        poster={
-          movie.poster
-            ? `https://image.tmdb.org/t/p/original/${movie.poster}`
-            : 'src/assets/images/movie-poster-placeholder.jpg'
-        }
-        movie={movie.name}
-        director={movie.director}
-        genres={movie.genres}
-        date={movie.date}
-        runtime={movie.runtime}
-      />
+      <motion.div
+        key={movie.index}
+        initial={{ x: '-100%', opacity: 0 }}
+        animate={{
+          x: isVisible ? '0%' : '100%',
+          opacity: isVisible ? 1 : 0,
+        }}
+        transition={{ duration: 0.5 }}>
+        <Card
+          title='Movies in Theater'
+          poster={
+            movie.poster
+              ? `https://image.tmdb.org/t/p/original/${movie.poster}`
+              : 'src/assets/images/movie-poster-placeholder.jpg'
+          }
+          movie={movie.name}
+          director={movie.director}
+          genres={movie.genres}
+          date={movie.date}
+          runtime={movie.runtime}
+        />
+      </motion.div>
     </>
   );
 }

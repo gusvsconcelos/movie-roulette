@@ -5,7 +5,6 @@ export default {
     extend: {
       dropShadow: {
         brute: '4px 4px 0 rgb(0 0 0)',
-        inverse: '4px 4px 0 rgb(255 255 255)',
       },
       boxShadow: {
         brute: '6px 6px 0 rgb(0 0 0)',
