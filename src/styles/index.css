@@ -11,7 +11,7 @@
 @tailwind utilities;
 
 #root {
-  background-color: #ffc29f;
+  background-color: #f2ece9;
   background-image: url('src/assets/images/background-light.jpg');
   background-repeat: no-repeat;
   background-size: cover;

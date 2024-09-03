@@ -31,7 +31,10 @@ export function Home() {
 
     // console.log(`auth token: ${authToken}`);
 
-    const intervalTime: number = 3000;
+    // Global varibles
+    const intervalTime: number = 5000;
+    const timeoutTime: number = 500;
+
     const interval = setInterval(() => {
       setIsVisible(false); // Hide the card component
 
@@ -99,23 +102,23 @@ export function Home() {
           );
           const details = await detailsResponse.json();
 
-          // Formatting genres and runtime information
+          // Formatting genres
           const genres = details.genres
             .map((genre: { name: string }) => genre.name)
             .join(', ');
-
+          // Formatting runtime
           const runtime = `${Math.floor(details.runtime / 60)}h ${
             details.runtime % 60
           }m`;
 
           setMovie((prevMovie) => ({
             ...prevMovie,
-            runtime: runtime,
             genres: genres,
+            runtime: runtime,
           }));
         };
         fetchData();
-      }, 500);
+      }, timeoutTime);
     }, intervalTime);
 
     return () => clearInterval(interval);
