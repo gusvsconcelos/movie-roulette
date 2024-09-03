@@ -13,6 +13,7 @@ export function Home() {
     director: string;
     genres: string;
     runtime: string;
+    rating: number;
   }>({
     index: 0,
     poster: '',
@@ -21,6 +22,7 @@ export function Home() {
     director: 'Movie Diector',
     genres: 'Genres',
     runtime: '2h 0m',
+    rating: 0,
   });
 
   const [isVisible, setIsVisible] = useState<boolean>(true);
@@ -32,7 +34,7 @@ export function Home() {
     // console.log(`auth token: ${authToken}`);
 
     // Global varibles
-    const intervalTime: number = 5000;
+    const intervalTime: number = 3000;
     const timeoutTime: number = 500;
 
     // API data fetch
@@ -98,11 +100,16 @@ export function Home() {
       const runtime = `${Math.floor(details.runtime / 60)}h ${
         details.runtime % 60
       }m`;
+      // Rating
+      const rating: number = Math.floor(details.vote_average);
+
+      console.log(Math.floor(details.vote_average));
 
       setMovie((prevMovie) => ({
         ...prevMovie,
         genres: genres,
         runtime: runtime,
+        rating: rating,
       }));
     };
     fetchData();
@@ -129,7 +136,7 @@ export function Home() {
       <InTheater />
       <motion.div
         key={movie.index}
-        initial={{ x: '-100%', opacity: 0 }}
+        initial={{ x: '-50%', opacity: 0 }}
         animate={{
           x: isVisible ? '0%' : '100%',
           opacity: isVisible ? 1 : 0,
@@ -147,6 +154,7 @@ export function Home() {
           genres={movie.genres}
           date={movie.date}
           runtime={movie.runtime}
+          rating={movie.rating}
         />
       </motion.div>
     </>
