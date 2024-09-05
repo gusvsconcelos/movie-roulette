@@ -34,7 +34,7 @@ export function Home() {
     // console.log(`auth token: ${authToken}`);
 
     // Global varibles
-    const intervalTime: number = 3000;
+    const intervalTime: number = 5000;
     const timeoutTime: number = 500;
 
     // API data fetch
