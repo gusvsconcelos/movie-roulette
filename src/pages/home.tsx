@@ -27,103 +27,102 @@ export function Home() {
 
   const [isVisible, setIsVisible] = useState<boolean>(true);
 
+  // Fetching movie data
   useEffect(() => {
     // Authentication variables
     const authToken = import.meta.env.VITE_ACCESS_TOKEN_AUTH;
-
     // console.log(`auth token: ${authToken}`);
 
-    // Global varibles
+    try {
+      // API data fetch
+      const options = {
+        method: 'GET',
+        headers: {
+          accept: 'application/json',
+          Authorization: `Bearer ${authToken}`,
+        },
+      };
+
+      const fetchData = async (index: number) => {
+        const response = await fetch(
+          'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1',
+          options
+        );
+        const data = await response.json();
+
+        // console.log(`API Results: ${data.results}`);
+
+        // Formatting movie title
+        const movieTitle: string =
+          data.results[index].title.includes(':') &&
+          data.results[index].title.length > 20
+            ? data.results[index].title.split(':')[0]
+            : data.results[index].title;
+
+        // Taking only the release year
+        const date: string = data.results[index].release_date.slice(0, 4);
+
+        const movieID = data.results[index].id;
+
+        const creditsResponse = await fetch(
+          `https://api.themoviedb.org/3/movie/${movieID}/credits?language=en-US`,
+          options
+        );
+        const credits = await creditsResponse.json();
+
+        const director = credits.crew.find(
+          (crew: { department: string }) => crew.department === 'Directing'
+        );
+
+        const detailsResponse = await fetch(
+          `https://api.themoviedb.org/3/movie/${movieID}?language=en-US`,
+          options
+        );
+        const details = await detailsResponse.json();
+
+        // Formatting genres
+        const genres = details.genres
+          .map((genre: { name: string }) => genre.name)
+          .join(', ');
+
+        // Formatting runtime
+        const runtime = `${Math.floor(details.runtime / 60)}h ${
+          details.runtime % 60
+        }m`;
+
+        // Rating
+        const rating: number = Math.floor(details.vote_average);
+
+        setMovie((movie) => ({
+          ...movie,
+          poster: data.results[index].poster_path,
+          name: movieTitle,
+          date: date,
+          director: director ? director.name : 'Unknown',
+          genres: genres,
+          runtime: runtime,
+          rating: rating,
+        }));
+      };
+      fetchData(movie.index);
+    } catch (error) {
+      console.log(`Failed to fetch data. ${error}`);
+    }
+  }, [movie.index]);
+
+  // Updating movie index and card animation
+  useEffect(() => {
     const intervalTime: number = 5000;
     const timeoutTime: number = 500;
-
-    // API data fetch
-    const options = {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-        Authorization: `Bearer ${authToken}`,
-      },
-    };
-
-    const fetchData = async () => {
-      const response = await fetch(
-        'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1',
-        options
-      );
-      const data = await response.json();
-
-      // console.log(`API Results: ${data.results}`);
-
-      const movieTitle: string =
-        data.results[movie.index].title.includes(':') &&
-        data.results[movie.index].title.length > 20
-          ? data.results[movie.index].title.split(':')[0]
-          : data.results[movie.index].title;
-
-      const date: string = data.results[movie.index].release_date.slice(0, 4);
-
-      setMovie((prevMovie) => ({
-        ...prevMovie,
-        poster: data.results[movie.index].poster_path,
-        name: movieTitle,
-        date: date,
-      }));
-
-      const movieID = data.results[movie.index].id;
-
-      const creditsResponse = await fetch(
-        `https://api.themoviedb.org/3/movie/${movieID}/credits?language=en-US`,
-        options
-      );
-      const credits = await creditsResponse.json();
-
-      const director = credits.crew.find(
-        (crew: { department: string }) => crew.department === 'Directing'
-      );
-
-      // Director
-      setMovie((prevMovie) => ({
-        ...prevMovie,
-        director: director ? director.name : 'Unknown',
-      }));
-
-      const detailsResponse = await fetch(
-        `https://api.themoviedb.org/3/movie/${movieID}?language=en-US`,
-        options
-      );
-      const details = await detailsResponse.json();
-
-      // Formatting genres
-      const genres = details.genres
-        .map((genre: { name: string }) => genre.name)
-        .join(', ');
-      // Formatting runtime
-      const runtime = `${Math.floor(details.runtime / 60)}h ${
-        details.runtime % 60
-      }m`;
-      // Rating
-      const rating: number = Math.floor(details.vote_average);
-
-      console.log(Math.floor(details.vote_average));
-
-      setMovie((prevMovie) => ({
-        ...prevMovie,
-        genres: genres,
-        runtime: runtime,
-        rating: rating,
-      }));
-    };
-    fetchData();
 
     const interval = setInterval(() => {
       setIsVisible(false); // Hide the card component
 
       setTimeout(async () => {
         // Variable to change movie selection
-        setMovie((prevMovie) => ({
-          ...prevMovie,
-          index: (prevMovie.index + 1) % 20, // Reset index to 0 when greater than or equal to 20
+        setMovie((movie) => ({
+          ...movie,
+          index: (movie.index + 1) % 20, // Reset index to 0 when greater than or equal to 20
         }));
 
         setIsVisible(true); // Show the card component
@@ -131,7 +130,7 @@ export function Home() {
     }, intervalTime);
 
     return () => clearInterval(interval);
-  }, [movie.index]);
+  }, []);
 
   return (
     <>
