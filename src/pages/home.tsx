@@ -3,17 +3,19 @@ import { motion } from 'framer-motion';
 import { Card } from '../components/ui/Card';
 import { InTheater } from '../components/ui/Title';
 
+interface Movie {
+  index: number;
+  poster: string;
+  name: string;
+  date: string;
+  director: string;
+  genres: string;
+  runtime: string;
+  rating: number;
+}
+
 export function Home() {
-  const [movie, setMovie] = useState<{
-    index: number;
-    poster: string;
-    name: string;
-    date: string;
-    director: string;
-    genres: string;
-    runtime: string;
-    rating: number;
-  }>({
+  const [movie, setMovie] = useState<Movie>({
     index: 0,
     poster: '',
     name: 'Movie Name',
@@ -29,23 +31,30 @@ export function Home() {
   useEffect(() => {
     const authToken = import.meta.env.VITE_ACCESS_TOKEN_AUTH;
 
-    try {
-      const options = {
-        method: 'GET',
-        headers: {
-          accept: 'application/json',
-          Authorization: `Bearer ${authToken}`,
-        },
-      };
+    const fetchData = async (index: number) => {
+      try {
+        const options = {
+          method: 'GET',
+          headers: {
+            accept: 'application/json',
+            Authorization: `Bearer ${authToken}`,
+          },
+        };
 
-      const fetchData = async (index: number) => {
         const response = await fetch(
           'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1',
           options
         );
         const data = await response.json();
 
+        if (!data.results) return;
+
         // console.log(`API Results: ${data.results}`);
+
+        setMovie((prevMovie) => ({
+          ...prevMovie,
+          poster: data.results[index].poster_path,
+        }));
 
         const movieTitle: string =
           data.results[index].title.includes(':') &&
@@ -54,8 +63,7 @@ export function Home() {
             : data.results[index].title;
 
         const date: string = data.results[index].release_date.slice(0, 4);
-
-        const movieID = data.results[index].id;
+        const movieID: number = data.results[index].id;
 
         const creditsResponse = await fetch(
           `https://api.themoviedb.org/3/movie/${movieID}/credits?language=en-US`,
@@ -63,9 +71,8 @@ export function Home() {
         );
         const credits = await creditsResponse.json();
 
-        const director = credits.crew.find(
-          (crew: { department: string }) => crew.department === 'Directing'
-        );
+        // prettier-ignore
+        const director = credits.crew.find((crew: { department: string }) => crew.department === 'Directing');
 
         const detailsResponse = await fetch(
           `https://api.themoviedb.org/3/movie/${movieID}?language=en-US`,
@@ -73,19 +80,14 @@ export function Home() {
         );
         const details = await detailsResponse.json();
 
-        const genres = details.genres
-          .map((genre: { name: string }) => genre.name)
-          .join(', ');
-
-        const runtime = `${Math.floor(details.runtime / 60)}h ${
-          details.runtime % 60
-        }m`;
-
+        // prettier-ignore
+        const genres = details.genres.map((genre: { name: string }) => genre.name).join(', ');
+        // prettier-ignore
+        const runtime = `${Math.floor(details.runtime / 60)}h ${details.runtime % 60}m`;
         const rating: number = Math.floor(details.vote_average);
 
-        setMovie((movie) => ({
-          ...movie,
-          poster: data.results[index].poster_path,
+        setMovie((prevMovie) => ({
+          ...prevMovie,
           name: movieTitle,
           date: date,
           director: director ? director.name : 'Unknown',
@@ -93,24 +95,25 @@ export function Home() {
           runtime: runtime,
           rating: rating,
         }));
-      };
-      fetchData(movie.index);
-    } catch (error) {
-      console.log(`Failed to fetch data. ${error}`);
-    }
+      } catch (error) {
+        console.log(`Failed to fetch data. ${error}`);
+      }
+    };
+
+    fetchData(movie.index);
   }, [movie.index]);
 
   useEffect(() => {
     const intervalTime: number = 5000;
-    const timeoutTime: number = 500;
+    const timeoutTime: number = 1000;
 
     const interval = setInterval(() => {
       setIsVisible(false);
 
       setTimeout(async () => {
-        setMovie((movie) => ({
-          ...movie,
-          index: (movie.index + 1) % 20,
+        setMovie((prevMovie) => ({
+          ...prevMovie,
+          index: (prevMovie.index + 1) % 20,
         }));
 
         setIsVisible(true);
