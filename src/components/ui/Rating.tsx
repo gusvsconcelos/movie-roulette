@@ -7,15 +7,15 @@ export function Rating({ rate }: { rate: number }) {
   for (let i = 0; i < 5; i++) {
     stars.push(
       i < rate ? (
-        <FaStar key={i} className='mr-1' />
+        <FaStar key={i} className='mr-2' />
       ) : (
-        <FaRegStar key={i} className='mr-1' />
+        <FaRegStar key={i} className='mr-2' />
       )
     );
   }
 
   return (
-    <div className='inline-flex text-red-500 text-[1.7rem] drop-shadow-outline'>
+    <div className='inline-flex mt-4 text-orange-600 text-[1.7rem] drop-shadow-outline'>
       {stars}
     </div>
   );

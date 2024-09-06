@@ -27,17 +27,15 @@ export function Card(prop: props) {
       </div>
 
       {/* Movie information */}
-      <div className='w-fit h-80 m-1 py-16 pr-3'>
-        <div className='flex-row justify-end items-end mb-4'>
+      <div className='w-fit h-80 m-4 py-14'>
+        <div className='flex-row justify-end items-end'>
           <h1 className='font-bolder text-5xl antialiased'>{prop.movie}</h1>
-          <h2 className='font-bolder text-2xl antialiased'>{prop.director}</h2>
-          <h3 className='font-ui text-xl my-1 antialiased'>{prop.genres}</h3>
-          <h3 className='font-ui text-xl my-1 antialiased'>{prop.date}</h3>
-          <h3 className='font-ui text-xl my-1 antialiased'>{prop.runtime}</h3>
-        </div>
-
-        {/* Rating stars */}
-        <div>
+          <h2 className='font-bolder text-2xl mb-2 antialiased'>
+            {prop.director}
+          </h2>
+          <h3 className='font-ui text-xl antialiased'>{prop.genres}</h3>
+          <h3 className='font-ui text-xl antialiased'>{prop.date}</h3>
+          <h3 className='font-ui text-xl antialiased'>{prop.runtime}</h3>
           <Rating rate={prop.rating / 2} />
         </div>
       </div>

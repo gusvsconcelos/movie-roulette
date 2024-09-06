@@ -51,10 +51,7 @@ export function Home() {
 
         // console.log(`API Results: ${data.results}`);
 
-        setMovie((prevMovie) => ({
-          ...prevMovie,
-          poster: data.results[index].poster_path,
-        }));
+        const poster: string = data.results[index].poster_path;
 
         const movieTitle: string =
           data.results[index].title.includes(':') &&
@@ -88,6 +85,7 @@ export function Home() {
 
         setMovie((prevMovie) => ({
           ...prevMovie,
+          poster: poster,
           name: movieTitle,
           date: date,
           director: director ? director.name : 'Unknown',
@@ -105,7 +103,7 @@ export function Home() {
 
   useEffect(() => {
     const intervalTime: number = 5000;
-    const timeoutTime: number = 1000;
+    const timeoutTime: number = 500;
 
     const interval = setInterval(() => {
       setIsVisible(false);
