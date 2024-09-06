@@ -4,7 +4,6 @@ import { Card } from '../components/ui/Card';
 import { InTheater } from '../components/ui/Title';
 
 export function Home() {
-  // Initializing react states
   const [movie, setMovie] = useState<{
     index: number;
     poster: string;
@@ -27,14 +26,10 @@ export function Home() {
 
   const [isVisible, setIsVisible] = useState<boolean>(true);
 
-  // Fetching movie data
   useEffect(() => {
-    // Authentication variables
     const authToken = import.meta.env.VITE_ACCESS_TOKEN_AUTH;
-    // console.log(`auth token: ${authToken}`);
 
     try {
-      // API data fetch
       const options = {
         method: 'GET',
         headers: {
@@ -52,14 +47,12 @@ export function Home() {
 
         // console.log(`API Results: ${data.results}`);
 
-        // Formatting movie title
         const movieTitle: string =
           data.results[index].title.includes(':') &&
           data.results[index].title.length > 20
             ? data.results[index].title.split(':')[0]
             : data.results[index].title;
 
-        // Taking only the release year
         const date: string = data.results[index].release_date.slice(0, 4);
 
         const movieID = data.results[index].id;
@@ -80,17 +73,14 @@ export function Home() {
         );
         const details = await detailsResponse.json();
 
-        // Formatting genres
         const genres = details.genres
           .map((genre: { name: string }) => genre.name)
           .join(', ');
 
-        // Formatting runtime
         const runtime = `${Math.floor(details.runtime / 60)}h ${
           details.runtime % 60
         }m`;
 
-        // Rating
         const rating: number = Math.floor(details.vote_average);
 
         setMovie((movie) => ({
@@ -110,22 +100,20 @@ export function Home() {
     }
   }, [movie.index]);
 
-  // Updating movie index and card animation
   useEffect(() => {
     const intervalTime: number = 5000;
     const timeoutTime: number = 500;
 
     const interval = setInterval(() => {
-      setIsVisible(false); // Hide the card component
+      setIsVisible(false);
 
       setTimeout(async () => {
-        // Variable to change movie selection
         setMovie((movie) => ({
           ...movie,
-          index: (movie.index + 1) % 20, // Reset index to 0 when greater than or equal to 20
+          index: (movie.index + 1) % 20,
         }));
 
-        setIsVisible(true); // Show the card component
+        setIsVisible(true);
       }, timeoutTime);
     }, intervalTime);
 
