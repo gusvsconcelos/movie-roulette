@@ -61,11 +61,13 @@ export function Home() {
           ? data.results[movie.index].title.split(':')[0]
           : data.results[movie.index].title;
 
+      const date: string = data.results[movie.index].release_date.slice(0, 4);
+
       setMovie((prevMovie) => ({
         ...prevMovie,
         poster: data.results[movie.index].poster_path,
         name: movieTitle,
-        date: data.results[movie.index].release_date,
+        date: date,
       }));
 
       const movieID = data.results[movie.index].id;

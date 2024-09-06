@@ -13,10 +13,10 @@ interface props {
 
 export function Card(prop: props) {
   return (
-    <article className='flex justify-center items-center w-fit h-fit min-w-[425px] m-2 p-2 border-4 border-black bg-white-alt shadow-brute'>
-      {/* movie poster */}
+    <article className='flex justify-center items-center w-fit h-fit min-w-[425px] m-2 p-4 border-4 border-black bg-white-alt shadow-brute'>
+      {/* Movie poster */}
       <div className='relative w-56 h-80 m-1'>
-        <div className='absolute top-8 left-4 w-[195px] h-[274px] border-2 border-black'></div>
+        <div className='absolute top-8 left-4 w-[197px] h-[276px] border-2 border-black'></div>
 
         <img
           src={prop.poster}
@@ -26,24 +26,19 @@ export function Card(prop: props) {
         />
       </div>
 
-      {/* movie information */}
-      <div className='w-fit h-80 m-1 py-14 pr-3'>
+      {/* Movie information */}
+      <div className='w-fit h-80 m-1 py-16 pr-3'>
         <div className='flex-row justify-end items-end mb-4'>
-          <h1 className='font-bolder text-4xl antialiased'>{prop.movie}</h1>
+          <h1 className='font-bolder text-5xl antialiased'>{prop.movie}</h1>
           <h2 className='font-bolder text-2xl antialiased'>{prop.director}</h2>
           <h3 className='font-ui text-xl my-1 antialiased'>{prop.genres}</h3>
           <h3 className='font-ui text-xl my-1 antialiased'>{prop.date}</h3>
           <h3 className='font-ui text-xl my-1 antialiased'>{prop.runtime}</h3>
         </div>
 
-        {/* color palettes */}
+        {/* Rating stars */}
         <div>
           <Rating rate={prop.rating / 2} />
-          {/* <div className='inline-block w-6 h-6 mr-1 bg-yellow-200 border-2 border-black'></div>
-          <div className='inline-block w-6 h-6 mr-1 bg-red-200 border-2 border-black'></div>
-          <div className='inline-block w-6 h-6 mr-1 bg-green-200 border-2 border-black'></div>
-          <div className='inline-block w-6 h-6 mr-1 bg-blue-200 border-2 border-black'></div>
-          <div className='inline-block w-6 h-6 mr-1 bg-violet-200 border-2 border-black'></div> */}
         </div>
       </div>
     </article>

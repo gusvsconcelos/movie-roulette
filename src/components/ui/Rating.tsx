@@ -15,7 +15,7 @@ export function Rating({ rate }: { rate: number }) {
   }
 
   return (
-    <div className='inline-flex text-red-500 text-2xl drop-shadow-outline'>
+    <div className='inline-flex text-red-500 text-[1.7rem] drop-shadow-outline'>
       {stars}
     </div>
   );
