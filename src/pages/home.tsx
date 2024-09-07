@@ -6,7 +6,7 @@ import { InTheater } from '../components/ui/Title';
 interface Movie {
   index: number;
   poster: string;
-  name: string;
+  title: string;
   date: string;
   director: string;
   genres: string;
@@ -18,7 +18,7 @@ export function Home() {
   const [movie, setMovie] = useState<Movie>({
     index: 0,
     poster: '',
-    name: 'Movie Name',
+    title: 'Movie Name',
     date: '01-01-1970',
     director: 'Movie Diector',
     genres: 'Genres',
@@ -43,7 +43,7 @@ export function Home() {
 
         const response = await fetch(
           'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1',
-          options
+          options,
         );
         const data = await response.json();
 
@@ -53,7 +53,7 @@ export function Home() {
 
         const poster: string = data.results[index].poster_path;
 
-        const movieTitle: string =
+        const title: string =
           data.results[index].title.includes(':') &&
           data.results[index].title.length > 20
             ? data.results[index].title.split(':')[0]
@@ -64,7 +64,7 @@ export function Home() {
 
         const creditsResponse = await fetch(
           `https://api.themoviedb.org/3/movie/${movieID}/credits?language=en-US`,
-          options
+          options,
         );
         const credits = await creditsResponse.json();
 
@@ -73,7 +73,7 @@ export function Home() {
 
         const detailsResponse = await fetch(
           `https://api.themoviedb.org/3/movie/${movieID}?language=en-US`,
-          options
+          options,
         );
         const details = await detailsResponse.json();
 
@@ -86,7 +86,7 @@ export function Home() {
         setMovie((prevMovie) => ({
           ...prevMovie,
           poster: poster,
-          name: movieTitle,
+          title: title,
           date: date,
           director: director ? director.name : 'Unknown',
           genres: genres,
@@ -139,7 +139,7 @@ export function Home() {
               ? `https://image.tmdb.org/t/p/original/${movie.poster}`
               : 'src/assets/images/movie-poster-placeholder.jpg'
           }
-          movie={movie.name}
+          movie={movie.title}
           director={movie.director}
           genres={movie.genres}
           date={movie.date}

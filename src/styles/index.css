@@ -12,9 +12,9 @@
 
 #root {
   background-color: #f2ece9;
-  background-image: url('src/assets/images/background-light.jpg');
+  /* background-image: url('src/assets/images/background-light.jpg'); */
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: auto;
   background-position: center;
   background-attachment: fixed;
   overflow: hidden;

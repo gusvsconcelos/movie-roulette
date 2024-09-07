@@ -4,7 +4,7 @@ import { ToggleSwitch } from '../ui/ToggleSwitch';
 
 export function Header() {
   return (
-    <header className='flex justify-center items-center p-16 bg-white-alt shadow-header'>
+    <header className='flex justify-center items-center p-20 bg-white-alt shadow-header'>
       <Title styles='absolute left-16 text-7xl text-black' />
       <Nav />
       <ToggleSwitch />
