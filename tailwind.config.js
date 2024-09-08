@@ -8,7 +8,7 @@ export default {
       },
       boxShadow: {
         brute: '6px 6px 0 rgb(35 15 10)',
-        header: '0 4px 0 rgb(35 15 10)',
+        header: '0 6px 0 rgb(35 15 10)',
         button: '4px 4px 0 rgb(35 15 10)',
       },
       fontFamily: {
