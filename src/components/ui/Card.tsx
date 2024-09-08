@@ -13,7 +13,7 @@ interface props {
 
 export function Card(prop: props) {
   return (
-    <article className='flex justify-center items-center w-fit h-fit min-w-96 m-2 p-3 border-4 border-black bg-[#f2ece9] shadow-brute'>
+    <article className='flex justify-center items-center w-fit h-fit min-w-96 m-2 p-3 border-4 border-black bg-[#F8EEEC] shadow-brute'>
       {/* Movie poster */}
       <div className='relative w-56 h-80 m-1'>
         <div className='absolute top-8 left-5 w-48 h-72 border-2 border-black'></div>

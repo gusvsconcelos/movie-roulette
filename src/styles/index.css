@@ -10,10 +10,8 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background: linear-gradient(-90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px),
-    linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px), #f2ece9;
-  background-size: 12px 12px, 12px 12px, 120px 120px, 120px 120px, 120px 120px,
-    120px 120px, 120px 120px, 120px 120px;
+#root {
+  background: #fefce8 url(../assets/images/background-light.jpg) no-repeat
+    center/cover;
   overflow: hidden;
 }
