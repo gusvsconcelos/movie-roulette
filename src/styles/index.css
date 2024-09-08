@@ -10,12 +10,17 @@
 @tailwind components;
 @tailwind utilities;
 
-#root {
-  background-color: #f2ece9;
-  /* background-image: url('src/assets/images/background-light.jpg'); */
-  background-repeat: no-repeat;
-  background-size: auto;
-  background-position: center;
-  background-attachment: fixed;
+body {
+  background: linear-gradient(-90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px),
+    linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px), #f2ece9;
+  background-size:
+    10px 10px,
+    10px 10px,
+    80px 80px,
+    80px 80px,
+    80px 80px,
+    80px 80px,
+    80px 80px,
+    80px 80px;
   overflow: hidden;
 }

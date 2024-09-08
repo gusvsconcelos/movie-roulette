@@ -78,7 +78,7 @@ export function Home() {
         const details = await detailsResponse.json();
 
         // prettier-ignore
-        const genres = details.genres.map((genre: { name: string }) => genre.name).join(', ');
+        const genres = details.genres.slice(0, 3).map((genre: { name: string }) => genre.name).join(', ');
         // prettier-ignore
         const runtime = `${Math.floor(details.runtime / 60)}h ${details.runtime % 60}m`;
         const rating: number = Math.floor(details.vote_average);
@@ -102,8 +102,8 @@ export function Home() {
   }, [movie.index]);
 
   useEffect(() => {
-    const intervalTime: number = 5000;
-    const timeoutTime: number = 500;
+    const intervalTime: number = 8000;
+    const timeoutTime: number = 800;
 
     const interval = setInterval(() => {
       setIsVisible(false);
