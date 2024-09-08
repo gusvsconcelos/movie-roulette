@@ -1,3 +1,5 @@
+import { ListSorting } from '../components/ui/Title';
+
 export function SortList() {
-  return <h1>This is the Sort Movie From List page</h1>;
+  return <ListSorting />;
 }

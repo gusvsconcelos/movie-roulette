@@ -1,3 +1,9 @@
+import { RandomMovie } from '../components/ui/Title';
+
 export function SortMovie() {
-  return <h1>This is the Sort Random Movie page</h1>;
+  return (
+    <>
+      <RandomMovie />
+    </>
+  );
 }
