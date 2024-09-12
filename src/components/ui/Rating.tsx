@@ -1,5 +1,4 @@
-import { FaStar } from 'react-icons/fa';
-import { FaRegStar } from 'react-icons/fa';
+import { FaRegStar, FaStar } from 'react-icons/fa';
 
 export function Rating({ rate }: { rate: number }) {
   const stars = [];
@@ -10,7 +9,7 @@ export function Rating({ rate }: { rate: number }) {
         <FaStar key={i} className='mr-1' />
       ) : (
         <FaRegStar key={i} className='mr-1' />
-      ),
+      )
     );
   }
 

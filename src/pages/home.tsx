@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 import { Card } from '../components/ui/Card';
 import { InTheater } from '../components/ui/Title';
 
@@ -43,7 +43,7 @@ export function Home() {
 
         const response = await fetch(
           'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1',
-          options,
+          options
         );
         const data = await response.json();
 
@@ -64,7 +64,7 @@ export function Home() {
 
         const creditsResponse = await fetch(
           `https://api.themoviedb.org/3/movie/${movieID}/credits?language=en-US`,
-          options,
+          options
         );
         const credits = await creditsResponse.json();
 
@@ -73,7 +73,7 @@ export function Home() {
 
         const detailsResponse = await fetch(
           `https://api.themoviedb.org/3/movie/${movieID}?language=en-US`,
-          options,
+          options
         );
         const details = await detailsResponse.json();
 

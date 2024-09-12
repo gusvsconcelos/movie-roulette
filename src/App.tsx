@@ -1,8 +1,8 @@
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { Route, HashRouter as Router, Routes } from 'react-router-dom';
 import { Layout } from './components/layout/Layout';
 import { Home } from './pages/home';
-import { SortMovie } from './pages/sort-random';
 import { SortList } from './pages/sort-list';
+import { SortMovie } from './pages/sort-random';
 
 export default function App() {
   return (

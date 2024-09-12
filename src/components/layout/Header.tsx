@@ -1,5 +1,5 @@
-import { Title } from '../ui/Title';
 import { Nav } from '../ui/Nav';
+import { Title } from '../ui/Title';
 import { ToggleSwitch } from '../ui/ToggleSwitch';
 
 export function Header() {
