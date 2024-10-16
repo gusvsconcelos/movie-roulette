@@ -1,5 +1,5 @@
-import { ListSorting } from '../components/ui/Title';
+import { ListSorting } from '../components/ui/Title'
 
 export function SortList() {
-  return <ListSorting />;
+  return <ListSorting />
 }
