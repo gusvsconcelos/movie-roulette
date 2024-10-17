@@ -68,7 +68,6 @@ export function Home() {
         )
         const credits = await creditsResponse.json()
 
-        // prettier-ignore
         const director = credits.crew.find(
           (crew: { department: string }) => crew.department === 'Directing'
         )
@@ -79,12 +78,10 @@ export function Home() {
         )
         const details = await detailsResponse.json()
 
-        // prettier-ignore
         const genres = details.genres
           .slice(0, 3)
           .map((genre: { name: string }) => genre.name)
           .join(', ')
-        // prettier-ignore
         const runtime = `${Math.floor(details.runtime / 60)}h ${details.runtime % 60}m`
         const rating: number = Math.floor(details.vote_average)
 
