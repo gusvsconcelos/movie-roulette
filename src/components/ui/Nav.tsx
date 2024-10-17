@@ -1,19 +1,21 @@
 import { Link } from 'react-router-dom'
-import { Github } from 'lucide-react'
+import { Github, Dices, ListCheck } from 'lucide-react'
 
 export function Nav() {
   return (
     <nav className="flex items-center absolute right-32 m-1 font-ui text-xl">
       <Link
-        className="mx-4 hover:underline underline-offset-4 decoration-2"
+        className="flex items-center gap-1 mx-4 hover:underline underline-offset-4 decoration-2"
         to="/sort-random"
       >
+        <Dices />
         Sort Random Movie
       </Link>
       <Link
-        className="mx-4 hover:underline underline-offset-4 decoration-2"
+        className="flex items-center gap-1 mx-4 hover:underline underline-offset-4 decoration-2"
         to="/sort-list"
       >
+        <ListCheck />
         Sort Movie From List
       </Link>
       <a
