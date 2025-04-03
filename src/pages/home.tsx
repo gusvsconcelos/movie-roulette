@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { Card } from '../components/ui/Card'
 import { InTheater } from '../components/ui/Title'
 import { moviesData } from '../utils/data'
@@ -16,77 +16,77 @@ interface Movie {
 }
 
 export function Home() {
-  const [movie, setMovie] = useState<Movie>({
-    index: 0,
-    poster: '',
-    title: 'Movie Name',
-    date: '01-01-1970',
-    director: 'Movie Diector',
-    genres: 'Genres',
-    runtime: '2h 0m',
-    rating: 0,
-  })
+  const [movies, setMovies] = useState<Movie[]>([])
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [isVisible, setIsVisible] = useState(true)
 
-  const [isVisible, setIsVisible] = useState<boolean>(true)
-
-  useEffect(() => {
+  // Fetch all movies and preload their posters
+  const fetchAllMovies = useCallback(async () => {
     const authToken = import.meta.env.VITE_ACCESS_TOKEN_AUTH
+    const moviePromises = Array.from({ length: 20 }, (_, index) =>
+      moviesData(index, authToken)
+    )
+    const movieResults = await Promise.all(moviePromises)
+    const validMovies = movieResults.filter(Boolean) as Movie[]
 
-    const fetchData = async (index: number) => {
-      const movieData = await moviesData(index, authToken)
-      if (movieData) {
-        setMovie(movieData)
-      }
+    // Preload all posters
+    for (const movie of validMovies) {
+      const img = new Image()
+      img.src = `https://image.tmdb.org/t/p/original/${movie.poster}`
     }
 
-    fetchData(movie.index)
-  }, [movie.index])
+    return validMovies
+  }, [])
 
+  // Load all movies on component mount
   useEffect(() => {
-    const intervalTime: number = 8000
-    const timeoutTime: number = 800
+    fetchAllMovies().then(setMovies)
+  }, [fetchAllMovies])
 
+  // Handle movie transitions with animation
+  useEffect(() => {
+    if (movies.length === 0) return
+
+    const intervalTime = 5000
     const interval = setInterval(() => {
       setIsVisible(false)
 
-      setTimeout(async () => {
-        setMovie(prevMovie => ({
-          ...prevMovie,
-          index: (prevMovie.index + 1) % 20,
-        }))
-
+      setTimeout(() => {
+        setCurrentIndex(prevIndex => (prevIndex + 1) % movies.length)
         setIsVisible(true)
-      }, timeoutTime)
+      }, 1000) // Match animation duration
     }, intervalTime)
 
     return () => clearInterval(interval)
-  }, [])
+  }, [movies])
+
+  if (movies.length === 0) return <div>Loading...</div>
+
+  const currentMovie = movies[currentIndex]
 
   return (
     <>
       <InTheater />
       <motion.div
-        key={movie.index}
+        key={currentMovie.index}
         initial={{ x: '-50%', opacity: 0 }}
-        animate={{
-          x: isVisible ? '0%' : '100%',
-          opacity: isVisible ? 1 : 0,
-        }}
-        transition={{ duration: 0.5 }}
+        animate={{ x: isVisible ? '0%' : '100%', opacity: isVisible ? 1 : 0 }}
+        transition={{ duration: 1, ease: 'easeInOut' }}
+        style={{ willChange: 'transform, opacity' }}
       >
         <Card
           title="Movies in Theater"
           poster={
-            movie.poster
-              ? `https://image.tmdb.org/t/p/original/${movie.poster}`
+            currentMovie.poster
+              ? `https://image.tmdb.org/t/p/original/${currentMovie.poster}`
               : 'src/assets/images/movie-poster-placeholder.jpg'
           }
-          movie={movie.title}
-          director={movie.director}
-          genres={movie.genres}
-          date={movie.date}
-          runtime={movie.runtime}
-          rating={movie.rating}
+          movie={currentMovie.title}
+          director={currentMovie.director}
+          genres={currentMovie.genres}
+          date={currentMovie.date}
+          runtime={currentMovie.runtime}
+          rating={currentMovie.rating}
         />
       </motion.div>
     </>
