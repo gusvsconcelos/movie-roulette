@@ -1,5 +1,6 @@
 import { RandomMovie } from '../components/ui/Title'
 import { moviesData } from '../utils/data'
+import { Button } from '../components/ui/Button'
 
 export function SortMovie() {
   const getRandomInt = (max: number) => {
@@ -15,6 +16,7 @@ export function SortMovie() {
   return (
     <>
       <RandomMovie />
+      <Button text="SORT MOVIE" />
     </>
   )
 }
