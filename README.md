@@ -29,6 +29,8 @@ Movie Roulette is a web application designed to help users decide what movie to 
 - **Dark Mode Toggle**: Allows users to switch between light and dark themes.
 - **Responsive Design**: Fully responsive UI for desktop and mobile devices.
 
+<br>
+
 ## Technologies Used
 
 - **React**: Frontend library for building user interfaces.
@@ -39,6 +41,8 @@ Movie Roulette is a web application designed to help users decide what movie to 
 - **TMDb API**: Used to fetch movie data.
 - **React Router**: For routing between pages.
 - **Lucide Icons**: Icon library for UI elements.
+
+<br>
 
 ## Project Structure
 
@@ -62,6 +66,8 @@ Movie Roulette is a web application designed to help users decide what movie to 
 └── vite.config.ts       # Vite configuration
 ```
 
+<br>
+
 ## Setup and Installation
 
 1. Clone the repository:
@@ -84,6 +90,8 @@ Movie Roulette is a web application designed to help users decide what movie to 
 
 5. Open the application in your browser at `http://localhost:5173`.
 
+<br>
+
 ## Environment Variables
 
 The project requires the following environment variables to be set in a `.env` file:
@@ -96,6 +104,8 @@ VITE_ACCESS_TOKEN_AUTH=your_tmdb_auth_token
 - `VITE_API_KEY`: Your API key from [TMDb](https://www.themoviedb.org/documentation/api).
 - `VITE_ACCESS_TOKEN_AUTH`: Your authentication token from TMDb.
 
+<br>
+
 ## Scripts
 
 The following scripts are available in the `package.json`:
@@ -104,6 +114,8 @@ The following scripts are available in the `package.json`:
 - **`npm run build`**: Builds the project for production.
 - **`npm run preview`**: Previews the production build.
 - **`npm run lint`**: Runs ESLint to check for code quality issues.
+
+<br>
 
 ## API Integration
 
@@ -127,6 +139,8 @@ export const moviesData = async (index: number): Promise<Movie | null> => {
 };
 ```
 
+<br>
+
 ## Components Overview
 
 ### Layout Components
@@ -147,9 +161,13 @@ export const moviesData = async (index: number): Promise<Movie | null> => {
 - **`Home`**: Displays a carousel of movies currently in theaters.
 - **`Sort Random`**: Allows users to fetch a random movie.
 
+<br>
+
 ## License
 
 This project is licensed under the [Apache License 2.0](LICENSE).
+
+<br>
 
 ## Author
 
