@@ -1,7 +1,6 @@
 import { Rating } from './Rating'
 
 interface props {
-  title?: string
   poster?: string
   movie?: string
   director?: string

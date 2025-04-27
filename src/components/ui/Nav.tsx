@@ -19,7 +19,7 @@ export function Nav() {
         Sort Movie From List
       </Link>
       <a
-        className="flex items-center gap-1 w-fit mx-4 p-2 border-2 border-black bg-[#DAA192] hover:shadow-button"
+        className="flex items-center gap-1 w-fit mx-4 p-2 border-2 border-black bg-[#DAA192] hover:shadow-button transition-all"
         href="https://github.com/gusvsconcelos/movie-roulette.git"
         target="_blank"
         rel="noreferrer"

@@ -1,8 +1,14 @@
-export function Button({ text }: { text: string }) {
+interface ButtonProps {
+  text: string
+  onClick?: () => void
+}
+
+export function Button({ text, onClick }: ButtonProps) {
   return (
     <button
       type="button"
-      className="m-2 py-1 px-5 border-2 border-black bg-green-200 font-ui font-semibold text-xl antialiased hover:shadow-button active:bg-green-300"
+      className="mt-4 p-3 border-[3px] border-black shadow-button bg-[#DAA192] font-title font-bold text-2xl antialiased  active:shadow-none active:bg-[#AB5139] active:text-[#F8EEEC] transition-all"
+      onClick={onClick}
     >
       {text}
     </button>

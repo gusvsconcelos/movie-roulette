@@ -9,21 +9,25 @@ interface Movie {
   rating: number
 }
 
-export const moviesData = async (
-  index: number,
-  authToken: string
-): Promise<Movie | null> => {
+export const moviesData = async (index: number): Promise<Movie | null> => {
+  const API_KEY: string = import.meta.env.VITE_API_KEY
+  const AUTH_TOKEN: string = import.meta.env.VITE_ACCESS_TOKEN_AUTH
+
+  if (!API_KEY || !AUTH_TOKEN) {
+    throw new Error('API Key or Authentication Token not found!')
+  }
+
   try {
     const options = {
       method: 'GET',
       headers: {
         accept: 'application/json',
-        Authorization: `Bearer ${authToken}`,
+        Authorization: `Bearer ${AUTH_TOKEN}`,
       },
     }
 
     const response = await fetch(
-      'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1',
+      `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1&api_key=${API_KEY}`,
       options
     )
     const data = await response.json()
@@ -42,7 +46,7 @@ export const moviesData = async (
     const movieID: number = data.results[index].id
 
     const creditsResponse = await fetch(
-      `https://api.themoviedb.org/3/movie/${movieID}/credits?language=en-US`,
+      `https://api.themoviedb.org/3/movie/${movieID}/credits?language=en-US&api_key=${API_KEY}`,
       options
     )
     const credits = await creditsResponse.json()
@@ -52,7 +56,7 @@ export const moviesData = async (
     )
 
     const detailsResponse = await fetch(
-      `https://api.themoviedb.org/3/movie/${movieID}?language=en-US`,
+      `https://api.themoviedb.org/3/movie/${movieID}?language=en-US&api_key=${API_KEY}`,
       options
     )
     const details = await detailsResponse.json()

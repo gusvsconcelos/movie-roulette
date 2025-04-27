@@ -21,9 +21,8 @@ export function Home() {
   const [isVisible, setIsVisible] = useState(true)
 
   const fetchAllMovies = useCallback(async () => {
-    const authToken = import.meta.env.VITE_ACCESS_TOKEN_AUTH
     const moviePromises = Array.from({ length: 20 }, (_, index) =>
-      moviesData(index, authToken)
+      moviesData(index)
     )
     const movieResults = await Promise.all(moviePromises)
     const validMovies = movieResults.filter(Boolean) as Movie[]
@@ -70,7 +69,6 @@ export function Home() {
         style={{ willChange: 'transform, opacity' }}
       >
         <Card
-          title="Movie in Theater"
           poster={
             currentMovie.poster
               ? `https://image.tmdb.org/t/p/original/${currentMovie.poster}`
@@ -80,7 +78,7 @@ export function Home() {
           director={currentMovie.director}
           genres={currentMovie.genres}
           date={currentMovie.date}
-          runtime={currentMovie.date}
+          runtime={currentMovie.runtime}
           rating={currentMovie.rating}
         />
       </motion.div>
