@@ -61,6 +61,7 @@ export function SortMovie() {
             date={movie?.date ?? 'Unknown Date'}
             runtime={movie?.runtime ?? 'Unknown Runtime'}
             rating={movie?.rating ?? 0}
+            styles="mt-20"
           />
         </div>
       )}

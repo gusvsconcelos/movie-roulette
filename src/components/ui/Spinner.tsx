@@ -1,6 +1,6 @@
 export function Spinner() {
   return (
-    <div className="flex items-center justify-center w-full h-[400px] text-gray-900 dark:text-gray-100 dark:bg-gray-950">
+    <div className="flex items-center justify-center w-full h-[392px] mt-20 text-gray-900 dark:text-gray-100 dark:bg-gray-950">
       <div>
         <h1 className="text-xl md:text-3xl font-bold flex items-center">
           S
