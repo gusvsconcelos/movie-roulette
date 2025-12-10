@@ -1,14 +1,14 @@
-import { Rating } from './Rating'
+import { Rating } from "./Rating";
 
 interface props {
-  poster?: string
-  movie?: string
-  director?: string
-  genres?: string
-  date?: string
-  runtime?: string
-  rating: number
-  styles?: string
+  poster?: string;
+  movie?: string;
+  director?: string;
+  genres?: string;
+  date?: string;
+  runtime?: string;
+  rating: number;
+  styles?: string;
 }
 
 export function Card(prop: props) {
@@ -42,5 +42,5 @@ export function Card(prop: props) {
         </div>
       </div>
     </article>
-  )
+  );
 }

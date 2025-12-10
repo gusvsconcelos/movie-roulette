@@ -1,7 +1,7 @@
-import { Route, HashRouter as Router, Routes } from 'react-router-dom'
-import { Layout } from './components/layout/Layout'
-import { Home } from './pages/home'
-import { SortMovie } from './pages/sort-random'
+import { Route, HashRouter as Router, Routes } from "react-router-dom";
+import { Layout } from "./components/layout/Layout";
+import { Home } from "./pages/home";
+import { SortMovie } from "./pages/sort-random";
 
 export default function App() {
   return (
@@ -13,5 +13,5 @@ export default function App() {
         </Route>
       </Routes>
     </Router>
-  )
+  );
 }

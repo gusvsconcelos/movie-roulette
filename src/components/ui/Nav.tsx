@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom'
-import { Github, Dices } from 'lucide-react'
+import { Link } from "react-router-dom";
+import { Github, Dices } from "lucide-react";
 
 export function Nav() {
   return (
@@ -22,5 +22,5 @@ export function Nav() {
         GitHub
       </a>
     </nav>
-  )
+  );
 }

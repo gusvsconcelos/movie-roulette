@@ -1,4 +1,4 @@
-import { MoonStar } from 'lucide-react'
+import { MoonStar } from "lucide-react";
 
 export function ToggleSwitch() {
   return (
@@ -12,5 +12,5 @@ export function ToggleSwitch() {
         </span>
       </label>
     </div>
-  )
+  );
 }

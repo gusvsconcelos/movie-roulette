@@ -1,7 +1,7 @@
-import { FaRegStar, FaStar } from 'react-icons/fa'
+import { FaRegStar, FaStar } from "react-icons/fa";
 
 export function Rating({ rate }: { rate: number }) {
-  const stars = []
+  const stars = [];
 
   for (let i = 0; i < 5; i++) {
     stars.push(
@@ -10,12 +10,12 @@ export function Rating({ rate }: { rate: number }) {
       ) : (
         <FaRegStar key={i} className="mr-1" />
       )
-    )
+    );
   }
 
   return (
     <div className="inline-flex mt-4 text-[#AA5139] text-[1.6rem] drop-shadow-outline">
       {stars}
     </div>
-  )
+  );
 }
