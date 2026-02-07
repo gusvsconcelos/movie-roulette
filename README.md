@@ -20,9 +20,3 @@ Movie Roulette is a web application designed to help users decide what movie to 
 - **TMDb API**: Used to fetch movie data.
 - **React Router**: For routing between pages.
 - **Lucide Icons**: Icon library for UI elements.
-
-## License
-This project is licensed under the [Apache License 2.0](LICENSE).
-
-## Author
-Developed by [Gustavo Vasconcelos](https://www.linkedin.com/in/gusvsconcelos).
