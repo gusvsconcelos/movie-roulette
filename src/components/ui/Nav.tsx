@@ -5,7 +5,7 @@ export function Nav() {
   return (
     <nav className="flex items-center absolute right-16 font-ui text-xl">
       <Link
-        className="flex items-center gap-1 mx-4 hover:underline underline-offset-4 decoration-2"
+        className="flex items-center gap-1 mx-4 hover:text-[#AA5139] transition-all duration-300"
         to="/sort-random"
       >
         <Dices />
@@ -13,7 +13,7 @@ export function Nav() {
       </Link>
 
       <a
-        className="flex items-center gap-1 w-fit ml-4 p-2 border-[3px] border-black bg-[#DAA192] shadow-button active:shadow-none active:bg-[#AB5139] active:text-[#F8EEEC] transition-all"
+        className="flex items-center gap-1 w-fit ml-4 p-2 border-[3px] border-black bg-[#DAA192] shadow-button hover:bg-[#AB5139] hover:text-[#F8EEEC] active:shadow-none transition-all duration-300"
         href="https://github.com/gusvsconcelos/movie-roulette.git"
         target="_blank"
         rel="noreferrer"

@@ -3,8 +3,8 @@ import { Title } from "../ui/Title";
 export function Footer() {
   return (
     <footer className="flex justify-center items-center p-10 bg-black select-none">
-      <Title styles="absolute left-16 text-[#F8EEEC] text-2xl hover:text-[#AA5139]" />
-      <p className="absolute right-16 text-sm font-ui text-[#F8EEEC] antialiased hover:underline underline-offset-4">
+      <Title styles="absolute left-16 text-[#F8EEEC] text-2xl hover:text-[#AA5139] transition-all duration-300" />
+      <p className="absolute right-16 text-sm font-ui text-[#F8EEEC] antialiased">
         &copy; {new Date().getFullYear()}{" "}
         <a
           href="https://www.linkedin.com/in/gusvsconcelos"
