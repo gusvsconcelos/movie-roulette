@@ -4,7 +4,7 @@ import { Title } from "../ui/Title";
 
 export function Header() {
   return (
-    <header className="flex justify-center items-center p-20 bg-[#F8EEEC] shadow-header">
+    <header className="flex justify-center items-center p-20 bg-[#F8EEEC] shadow-header select-none">
       <Title styles="absolute left-16 text-7xl text-black" />
       <Nav />
       {/* <ToggleSwitch /> */}
