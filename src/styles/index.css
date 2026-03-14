@@ -11,7 +11,6 @@
 @tailwind utilities;
 
 #root {
-  background: #fefce8 url(../assets/images/background.jpg) no-repeat
-    center/cover;
+  background-color: #f8eeec;
   overflow: hidden;
 }
