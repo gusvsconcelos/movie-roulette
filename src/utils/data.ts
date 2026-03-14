@@ -28,7 +28,7 @@ export const moviesData = async (index: number): Promise<Movie | null> => {
 
     const response = await fetch(
       `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1&api_key=${API_KEY}`,
-      options
+      options,
     );
     const data = await response.json();
 
@@ -47,17 +47,17 @@ export const moviesData = async (index: number): Promise<Movie | null> => {
 
     const creditsResponse = await fetch(
       `https://api.themoviedb.org/3/movie/${movieID}/credits?language=en-US&api_key=${API_KEY}`,
-      options
+      options,
     );
     const credits = await creditsResponse.json();
 
     const director = credits.crew.find(
-      (crew: { department: string }) => crew.department === "Directing"
+      (crew: { department: string }) => crew.department === "Directing",
     );
 
     const detailsResponse = await fetch(
       `https://api.themoviedb.org/3/movie/${movieID}?language=en-US&api_key=${API_KEY}`,
-      options
+      options,
     );
     const details = await detailsResponse.json();
 

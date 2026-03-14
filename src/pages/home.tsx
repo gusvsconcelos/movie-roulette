@@ -22,7 +22,7 @@ export function Home() {
 
   const fetchAllMovies = useCallback(async () => {
     const moviePromises = Array.from({ length: 20 }, (_, index) =>
-      moviesData(index)
+      moviesData(index),
     );
     const movieResults = await Promise.all(moviePromises);
     const validMovies = movieResults.filter(Boolean) as Movie[];

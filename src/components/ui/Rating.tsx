@@ -9,7 +9,7 @@ export function Rating({ rate }: { rate: number }) {
         <FaStar key={i} className="mr-1" />
       ) : (
         <FaRegStar key={i} className="mr-1" />
-      )
+      ),
     );
   }
 
