@@ -1,4 +1,4 @@
-/* custom fonts */
+/* CUSTOM FONTS */
 /* -- Archivo Narrow -- */
 @import url("https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&display=swap");
 /* -- Bebas Neue -- */
@@ -12,5 +12,10 @@
 
 #root {
   background-color: #f8eeec;
+  background-image:
+    linear-gradient(#00000050 2px, transparent 2px),
+    linear-gradient(90deg, #00000050 2px, transparent 2px);
+  background-size: 50px 50px;
+
   overflow: hidden;
 }
